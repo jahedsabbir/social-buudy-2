@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import Comments from '../Comments/Comments';
+import { useParams } from '@reach/router';
 
 const PostDetails = () => {
     const {postId} = useParams();
-    const [post, setPost] = useState({})
+    const [post, setPost] = useState({});
+    const [comment, setComment] = useState([]);
+
     useEffect(() => {
         const url = `https://jsonplaceholder.typicode.com/posts/${postId}`
         fetch(url)
@@ -12,7 +14,7 @@ const PostDetails = () => {
         .then(data => setPost(data))
     }, []);
 
-    const [comment, setComment] = useState([]);
+
     useEffect(() => {
         const url = `https://jsonplaceholder.typicode.com/comments?postId=${postId}`
         fetch(url)
